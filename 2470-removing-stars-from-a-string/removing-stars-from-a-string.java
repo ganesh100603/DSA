@@ -1,15 +1,20 @@
 class Solution {
     public String removeStars(String s) {
-        StringBuilder sb = new StringBuilder();
-
-        for (char c : s.toCharArray()) {
-            if (c == '*') {
-                sb.deleteCharAt(sb.length() - 1);
-            } else {
-                sb.append(c);
+        Deque<Character> stack = new ArrayDeque<>();
+        
+        for(char c : s.toCharArray()){
+            if(c == '*'){
+                stack.pop();
+            }else{
+                stack.push(c);
             }
         }
 
-        return sb.toString();
+        StringBuilder str = new StringBuilder();
+
+        while(!stack.isEmpty()){
+            str.append(stack.removeLast());
+        }
+        return str.toString();
     }
 }
